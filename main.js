@@ -35,6 +35,9 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+    mainWindow.openDevTools();
+  }
   createWindow();
   autoUpdater.checkForUpdatesAndNotify();
 });
@@ -52,7 +55,6 @@ app.on('activate', function () {
 });
 
 ipcMain.on('app_version', (event) => {
-  debugger;
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
@@ -67,5 +69,20 @@ autoUpdater.on('update-downloaded', () => {
 ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
+
+// setupDevelopmentEnvironment() {
+//   mainWindow.openDevTools();
+//   mainWindow.webContents.on('context-menu', (e, props) => {
+//     const { x, y } = props;
+//     Menu
+//       .buildFromTemplate([{
+//         label: 'Inspect element',
+//         click: () => {
+//           mainWindow.inspectElement(x, y);
+//         }
+//       }])
+//       .popup(mainWindow);
+//   });
+// };
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
