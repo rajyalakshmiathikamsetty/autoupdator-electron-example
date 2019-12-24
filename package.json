@@ -4,13 +4,20 @@
   "description": "To Auto Update Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder build  --win --publish never",
-    "deploy": "electron-builder build --win --publish always"
+    "start": "electron ."
   },
-  "repository": { 
-    "type" : "git",
-    "url" : "https://github.com/rajyalakshmiathikamsetty/autoupdator-electron-example.git"
+  "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "iffy",
+        "repo": "electron-updater-example"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rajyalakshmiathikamsetty/autoupdator-electron-example.git"
   },
   "keywords": [
     "Electron",
