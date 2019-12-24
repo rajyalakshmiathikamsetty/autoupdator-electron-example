@@ -7,7 +7,7 @@
       margin: 0;
       padding: 20px;
       font-family: sans-serif;
-      background-color: #eaeaea;
+      background-color: #ff5733;
       text-align: center;
     }
     #notification {
@@ -63,7 +63,6 @@
     function closeNotification() {
       notification.classList.add('hidden');
     }
-    
     function restartApp() {
       ipcRenderer.send('restart_app');
     }
