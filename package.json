@@ -8,9 +8,9 @@
     "deploy": "electron-builder build --win --publish always",
     "start": "electron ."
   },
-  "repository": { 
-    "type" : "git",
-    "url" : "https://github.com/rajyalakshmiathikamsetty/autoupdator-electron-example.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rajyalakshmiathikamsetty/autoupdator-electron-example.git"
   },
   "keywords": [
     "Electron",
