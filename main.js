@@ -67,7 +67,16 @@ autoUpdater.on('update-downloaded', () => {
 });
 
 ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
+  //autoUpdater.quitAndInstall();
+  try {
+    autoUpdater.quitAndInstall();
+    setTimeout(() => {
+      app.relaunch();
+      app.exit(0);
+    }, 6000);
+  } catch (e) {
+    dialog.showErrorBox('Error', 'Failed to install updates');
+  }
 });
 
 // setupDevelopmentEnvironment() {
