@@ -69,7 +69,8 @@ autoUpdater.on('update-downloaded', () => {
 ipcMain.on('restart_app', () => {
   //autoUpdater.quitAndInstall();
   try {
-    autoUpdater.quitAndInstall(false);
+    //autoUpdater.quitAndInstall(false);
+    autoUpdater.checkForUpdatesAndNotify();
     setTimeout(() => {
       app.relaunch();
       app.exit(0);
