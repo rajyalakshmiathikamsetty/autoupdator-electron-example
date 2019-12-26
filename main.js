@@ -58,18 +58,18 @@ ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
-autoUpdater.on('update-available', () => {
+autoUpdater.on('update_available', () => {
   mainWindow.webContents.send('update_available');
 });
 
-autoUpdater.on('update-downloaded', () => {
+autoUpdater.on('update_downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
 });
 
 ipcMain.on('restart_app', () => {
   //autoUpdater.quitAndInstall();
   try {
-    autoUpdater.quitAndInstall(false);
+    autoUpdater.quitAndInstall();
     //autoUpdater.checkForUpdatesAndNotify();
     setTimeout(() => {
       app.relaunch();
