@@ -1,8 +1,8 @@
-version: 1.0.8
+version: 1.0.9
 files:
-  - url: autoupdator-electron-example-Setup-1.0.8.exe
-    sha512: UoP/jsefMM+iJmQMgzdTwgDAvnbfKWbdzG5ZDDmmm6RU72oQlw6U7NHEourCm+AA8++iAKXEwuxjrMTCazPa7A==
-    size: 43098266
-path: autoupdator-electron-example-Setup-1.0.8.exe
-sha512: UoP/jsefMM+iJmQMgzdTwgDAvnbfKWbdzG5ZDDmmm6RU72oQlw6U7NHEourCm+AA8++iAKXEwuxjrMTCazPa7A==
-releaseDate: '2019-12-27T04:41:41.530Z'
+  - url: autoupdator-electron-example-Setup-1.0.9.exe
+    sha512: XoC4byOlyyOnvo/k3FNBtPxKtpdEG1zF2OftOsVVe27pS5Ugz7eLwnNZofudEF5YbwLMmD1vLHUxzPijfq4wkQ==
+    size: 43098311
+path: autoupdator-electron-example-Setup-1.0.9.exe
+sha512: XoC4byOlyyOnvo/k3FNBtPxKtpdEG1zF2OftOsVVe27pS5Ugz7eLwnNZofudEF5YbwLMmD1vLHUxzPijfq4wkQ==
+releaseDate: '2019-12-27T04:52:26.795Z'
