@@ -39,7 +39,8 @@ app.on('ready', () => {
     mainWindow.openDevTools();
   }
   createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
+  debugger;
+  autoUpdater.checkForUpdates();
 });
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -55,6 +56,7 @@ app.on('activate', function () {
 });
 
 ipcMain.on('app_version', (event) => {
+  console.log("event called"+app);
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
@@ -62,15 +64,17 @@ autoUpdater.on('update-available', () => {
   mainWindow.webContents.send('update_available');
 });
 
+autoUpdater.on('download-progress',() => {
+console.log("Download is in Progress...")
+});
+
 autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
 });
 
 ipcMain.on('restart_app', () => {
-  //autoUpdater.quitAndInstall();
   try {
-    autoUpdater.quitAndInstall();
-    //autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.quitAndInstall(true,true);
     setTimeout(() => {
       app.relaunch();
       app.exit(0);
@@ -78,6 +82,10 @@ ipcMain.on('restart_app', () => {
   } catch (e) {
     dialog.showErrorBox('Error', 'Failed to install updates');
   }
+});
+
+autoUpdater.on('error', (err) => {
+  console.log('Error in auto-updater. ' + err);
 });
 
 // setupDevelopmentEnvironment() {
