@@ -54,6 +54,16 @@
       message.innerText = 'A new update is available. Downloading now...';
       notification.classList.remove('hidden');
     });
+    ipcRenderer.on('check_update', () => {
+      ipcRenderer.removeAllListeners('check_update');
+      message.innerText = 'Looking for update...';
+      notification.classList.remove('hidden');
+    });
+    ipcRenderer.on('not_update', () => {
+      ipcRenderer.removeAllListeners('not_update');
+      message.innerText = 'update not available...';
+      notification.classList.remove('hidden');
+    });
     ipcRenderer.on('update_downloaded', () => {
       ipcRenderer.removeAllListeners('update_downloaded');
       message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';

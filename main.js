@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, ipcMain } = require('electron')
-const { autoUpdater } = require('update-electron-app')();
+const { autoUpdater } = require('electron-updater');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -62,6 +62,11 @@ ipcMain.on('app_version', (event) => {
 
 autoUpdater.on('update-available', () => {
   mainWindow.webContents.send('update_available');
+  autoUpdater.downloadUpdate().then((path)=>{
+    console.log('download path', path)
+  }).catch((e)=>{
+    console.log(e)
+  })
 });
 
 autoUpdater.on('download-progress',() => {
@@ -69,9 +74,15 @@ console.log("Download is in Progress...")
 });
 
 autoUpdater.on('update-downloaded', () => {
+  autoUpdater.autoInstallOnAppQuit()
   mainWindow.webContents.send('update_downloaded');
 });
-
+autoUpdater.on('checking-for-update', () => {
+  mainWindow.webContents.send('check_update');
+});
+autoUpdater.on('update-not-available', () => {
+  mainWindow.webContents.send('not_update');
+});
 ipcMain.on('restart_app', () => {
   try {
     autoUpdater.quitAndInstall(true,true);
