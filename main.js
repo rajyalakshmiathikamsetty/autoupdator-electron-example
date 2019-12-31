@@ -39,8 +39,8 @@ app.on('ready', () => {
     mainWindow.openDevTools();
   }
   createWindow();
-  debugger;
-  autoUpdater.checkForUpdates();
+  console.log("testing the app");
+  autoUpdater.checkForUpdatesAndNotify();
 });
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -61,6 +61,7 @@ ipcMain.on('app_version', (event) => {
 });
 
 autoUpdater.on('update-available', () => {
+  debugger;
   mainWindow.webContents.send('update_available');
   autoUpdater.downloadUpdate().then((path)=>{
     console.log('download path', path)
@@ -73,10 +74,16 @@ autoUpdater.on('download-progress',() => {
 console.log("Download is in Progress...")
 });
 
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.autoInstallOnAppQuit()
-  mainWindow.webContents.send('update_downloaded');
+autoUpdater.on('update-downloaded', (ev, info) => {
+  autoUpdater.quitAndInstall(true, true);
 });
+
+autoUpdater.downloadUpdate().then(() => {
+  console.log('wait for post download operation');
+}).catch(downloadError => {
+  console.error(downloadError);
+});
+
 autoUpdater.on('checking-for-update', () => {
   mainWindow.webContents.send('check_update');
 });

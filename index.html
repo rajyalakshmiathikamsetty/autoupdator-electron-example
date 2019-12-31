@@ -7,7 +7,7 @@
       margin: 0;
       padding: 20px;
       font-family: sans-serif;
-      background-color: #cbf8f1;
+      background-color: #37ad9c;
       text-align: center;
     }
     #notification {
@@ -47,7 +47,7 @@
     ipcRenderer.send('app_version');
     ipcRenderer.on('app_version', (event, arg) => {
       ipcRenderer.removeAllListeners('app_version');
-      version.innerText = 'Version ' + arg.version;
+      version.innerText = 'Version of the app ' + arg.version;
     });
     ipcRenderer.on('update_available', () => {
       ipcRenderer.removeAllListeners('update_available');
