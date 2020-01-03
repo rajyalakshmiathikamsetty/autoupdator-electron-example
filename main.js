@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain } = require('electron')
+const {app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -40,7 +40,7 @@ app.on('ready', () => {
   }
   console.log("testing the app");
   createWindow();
-  autoUpdater.checkForUpdates();
+  autoUpdater.checkForUpdatesAndNotify();
 });
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -76,7 +76,7 @@ console.log("Download is in Progress...")
 
 autoUpdater.on('update-downloaded', (ev, info) => {
   app.removeAllListeners("window-all-closed")
-  autoUpdater.quitAndInstall();
+ // autoUpdater.quitAndInstall();
 });
 
 autoUpdater.downloadUpdate().then(() => {
@@ -93,7 +93,7 @@ autoUpdater.on('update-not-available', () => {
 });
 ipcMain.on('restart_app', () => {
   try {
-    autoUpdater.quitAndInstall(true,true);
+    //autoUpdater.quitAndInstall(true,true);
     setTimeout(() => {
       app.relaunch();
       app.exit(0);
