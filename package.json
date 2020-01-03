@@ -8,10 +8,6 @@
     "deploy": "electron-builder build --win --publish always",
     "start": "electron ."
   },
-  "browserConsoleLogOptions": {
-    "level": "log",
-    "terminal": true
-},
   "repository": {
     "type": "git",
     "url": "https://github.com/rajyalakshmiathikamsetty/autoupdator-electron-example.git"
