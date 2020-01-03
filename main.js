@@ -40,7 +40,7 @@ app.on('ready', () => {
   }
   console.log("testing the app");
   createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.checkForUpdates();
 });
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -75,7 +75,8 @@ console.log("Download is in Progress...")
 });
 
 autoUpdater.on('update-downloaded', (ev, info) => {
-  autoUpdater.quitAndInstall(true, true);
+  app.removeAllListeners("window-all-closed")
+  autoUpdater.quitAndInstall();
 });
 
 autoUpdater.downloadUpdate().then(() => {
