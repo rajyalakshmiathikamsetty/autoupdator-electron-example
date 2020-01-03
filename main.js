@@ -75,7 +75,8 @@ console.log("Download is in Progress...")
 });
 
 autoUpdater.on('update-downloaded', (ev, info) => {
-  app.removeAllListeners("window-all-closed")
+  app.removeAllListeners("window-all-closed");
+  mainWindow.webContents.send('update_downloaded');
  // autoUpdater.quitAndInstall();
 });
 
