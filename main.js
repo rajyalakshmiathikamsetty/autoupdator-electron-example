@@ -85,7 +85,7 @@ autoUpdater.on('download-progress', (progressObj) => {
 autoUpdater.on('update-downloaded', (ev, info) => {
   app.removeAllListeners("window-all-closed");
   mainWindow.webContents.send('update_downloaded');
-  autoUpdater.quitAndInstall();
+  //autoUpdater.quitAndInstall();
 });
 // autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
 //   const dialogOpts = {
