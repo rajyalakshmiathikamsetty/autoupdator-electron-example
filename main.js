@@ -38,9 +38,10 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     mainWindow.openDevTools();
   }
+  autoUpdater.checkForUpdatesAndNotify();
   console.log("testing the app");
   createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
+ 
 });
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

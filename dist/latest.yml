@@ -1,8 +1,8 @@
-version: 2.0.6
+version: 2.0.7
 files:
-  - url: autoupdator-electron-example-Setup-2.0.6.exe
-    sha512: SCXLJnn1FTNS/CTKT1id/GyGeOLaIyDHSZxR7F5bxdnprOxB/ARul+Lh5/7ZMNBfQBpBmuL+3saWBH0GcbSeCA==
-    size: 43134158
-path: autoupdator-electron-example-Setup-2.0.6.exe
-sha512: SCXLJnn1FTNS/CTKT1id/GyGeOLaIyDHSZxR7F5bxdnprOxB/ARul+Lh5/7ZMNBfQBpBmuL+3saWBH0GcbSeCA==
-releaseDate: '2020-01-03T11:15:10.915Z'
+  - url: autoupdator-electron-example-Setup-2.0.7.exe
+    sha512: OZDIomD9lDmeGgCrYZ8wdqE5Ca/uIoAWAnX0M6yzpyTmL+NTvWX2pN/VguJdpDVvH3ijY31MKL/NDQ/UyrlFPg==
+    size: 43134176
+path: autoupdator-electron-example-Setup-2.0.7.exe
+sha512: OZDIomD9lDmeGgCrYZ8wdqE5Ca/uIoAWAnX0M6yzpyTmL+NTvWX2pN/VguJdpDVvH3ijY31MKL/NDQ/UyrlFPg==
+releaseDate: '2020-01-03T12:31:09.739Z'
