@@ -23,12 +23,12 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
-//   mainWindow.on('closed', function () {
-//     // Dereference the window object, usually you would store windows
-//     // in an array if your app supports multi windows, this is the time
-//     // when you should delete the corresponding element.
-//     mainWindow = null
-//   })
+  mainWindow.on('closed', function () {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null
+  })
  }
 
 // This method will be called when Electron has finished
@@ -38,9 +38,10 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     mainWindow.openDevTools();
   }
+  createWindow();
   autoUpdater.checkForUpdatesAndNotify();
   console.log("testing the app");
-  createWindow();
+  
  
 });
 // Quit when all windows are closed.
@@ -71,28 +72,34 @@ autoUpdater.on('update-available', () => {
   })
 });
 
-autoUpdater.on('download-progress',() => {
-console.log("Download is in Progress...")
-});
+autoUpdater.on('download-progress', (progressObj) => {
+  // let log_message = "Download speed: " + progressObj.bytesPerSecond
+  // log_message = log_message + ' - Downloaded ' + progressObj.percent + '%'
+  // log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')'
+  // dispatch(log_message)
 
-// autoUpdater.on('update-downloaded', (ev, info) => {
-//   app.removeAllListeners("window-all-closed");
-//   mainWindow.webContents.send('update_downloaded');
-//  // autoUpdater.quitAndInstall();
-// });
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-  const dialogOpts = {
-    type: 'info',
-    buttons: ['Restart', 'Later'],
-    title: 'Application Update',
-    message: process.platform === 'win32' ? releaseNotes : releaseName,
-    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-  }
+  mainWindow.webContents.send('download-progress', progressObj.percent)
 
-  dialog.showMessageBox(dialogOpts).then((returnValue) => {
-    if (returnValue.response === 0) autoUpdater.quitAndInstall()
-  })
 })
+
+autoUpdater.on('update-downloaded', (ev, info) => {
+  app.removeAllListeners("window-all-closed");
+  mainWindow.webContents.send('update_downloaded');
+  autoUpdater.quitAndInstall();
+});
+// autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+//   const dialogOpts = {
+//     type: 'info',
+//     buttons: ['Restart', 'Later'],
+//     title: 'Application Update',
+//     message: process.platform === 'win32' ? releaseNotes : releaseName,
+//     detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+//   }
+
+//   dialog.showMessageBox(dialogOpts).then((returnValue) => {
+//     if (returnValue.response === 0) autoUpdater.quitAndInstall()
+//   })
+// })
 
 autoUpdater.downloadUpdate().then(() => {
   console.log('wait for post download operation');
