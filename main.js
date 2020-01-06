@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
-
+const log = require('electron-log')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -16,8 +16,6 @@ function createWindow () {
     }
   })
 
-  // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -29,31 +27,33 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
+
+  return mainWindow
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
-    mainWindow.openDevTools();
-  }
+  
   console.log("testing the app");
   createWindow();
   autoUpdater.checkForUpdatesAndNotify();
-});
+})
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') app.quit()
-});
+})
 
-app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
+// app.on('activate', function () {
+//   if (mainWindow === null) {
+//     createWindow();
+//   }
+// });
 
 ipcMain.on('app_version', (event) => {
   console.log("event called"+app);
@@ -62,13 +62,8 @@ ipcMain.on('app_version', (event) => {
 
 autoUpdater.on('update-available', () => {
   debugger;
-  mainWindow.webContents.send('update_available');
-  autoUpdater.downloadUpdate().then((path)=>{
-    console.log('download path', path)
-  }).catch((e)=>{
-    console.log(e)
-  })
-});
+  mainWindow.webContents.send('update_available')
+})
 
 autoUpdater.on('download-progress',() => {
 console.log("Download is in Progress...")
@@ -76,25 +71,22 @@ console.log("Download is in Progress...")
 
 autoUpdater.on('update-downloaded', (ev, info) => {
   app.removeAllListeners("window-all-closed");
-  mainWindow.webContents.send('update_downloaded');
- // autoUpdater.quitAndInstall();
-});
+  mainWindow.webContents.send('update_downloaded')
+})
 
-autoUpdater.downloadUpdate().then(() => {
-  console.log('wait for post download operation');
-}).catch(downloadError => {
-  console.error(downloadError);
-});
+
 
 autoUpdater.on('checking-for-update', () => {
   mainWindow.webContents.send('check_update');
-});
+})
+
 autoUpdater.on('update-not-available', () => {
   mainWindow.webContents.send('not_update');
-});
+})
+
 ipcMain.on('restart_app', () => {
   try {
-    //autoUpdater.quitAndInstall(true,true);
+    autoUpdater.quitAndInstall(true,true);
     setTimeout(() => {
       app.relaunch();
       app.exit(0);
@@ -102,11 +94,11 @@ ipcMain.on('restart_app', () => {
   } catch (e) {
     dialog.showErrorBox('Error', 'Failed to install updates');
   }
-});
+});;
 
 autoUpdater.on('error', (err) => {
   console.log('Error in auto-updater. ' + err);
-});
+})
 
 // setupDevelopmentEnvironment() {
 //   mainWindow.openDevTools();
