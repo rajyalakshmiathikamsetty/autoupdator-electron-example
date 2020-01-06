@@ -23,13 +23,13 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
-  mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null
-  })
-}
+//   mainWindow.on('closed', function () {
+//     // Dereference the window object, usually you would store windows
+//     // in an array if your app supports multi windows, this is the time
+//     // when you should delete the corresponding element.
+//     mainWindow = null
+//   })
+ }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -75,11 +75,24 @@ autoUpdater.on('download-progress',() => {
 console.log("Download is in Progress...")
 });
 
-autoUpdater.on('update-downloaded', (ev, info) => {
-  app.removeAllListeners("window-all-closed");
-  mainWindow.webContents.send('update_downloaded');
- // autoUpdater.quitAndInstall();
-});
+// autoUpdater.on('update-downloaded', (ev, info) => {
+//   app.removeAllListeners("window-all-closed");
+//   mainWindow.webContents.send('update_downloaded');
+//  // autoUpdater.quitAndInstall();
+// });
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  }
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+})
 
 autoUpdater.downloadUpdate().then(() => {
   console.log('wait for post download operation');
