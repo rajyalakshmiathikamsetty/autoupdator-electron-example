@@ -63,6 +63,9 @@ ipcMain.on('app_version', (event) => {
 autoUpdater.on('update-available', () => {
   debugger;
   mainWindow.webContents.send('update_available')
+  setImmediate(() => {
+    autoUpdater.quitAndInstall();
+  })
 })
 
 autoUpdater.on('download-progress',() => {
