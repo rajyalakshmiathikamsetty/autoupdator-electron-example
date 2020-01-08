@@ -63,20 +63,22 @@ ipcMain.on('app_version', (event) => {
 autoUpdater.on('update-available', () => {
   debugger;
   mainWindow.webContents.send('update_available')
-  setImmediate(() => {
-    autoUpdater.quitAndInstall();
-  })
+  
 })
 
-autoUpdater.on('download-progress',() => {
-console.log("Download is in Progress...")
+autoUpdater.on('download-progress', (progressObj) => {
+  let log_message = "Download speed: " + progressObj.bytesPerSecond;
+  log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+  log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+  sendStatusToWindow(log_message, appversion);
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+  setTimeout(function () {
+      mainWindow.webContents.send('update_downloaded');
+      autoUpdater.quitAndInstall();
+  }, 5000)
 });
-
-autoUpdater.on('update-downloaded', (ev, info) => {
-  app.removeAllListeners("window-all-closed");
-  mainWindow.webContents.send('update_downloaded')
-})
-
 
 
 autoUpdater.on('checking-for-update', () => {

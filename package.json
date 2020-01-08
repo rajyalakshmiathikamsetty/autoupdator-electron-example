@@ -1,6 +1,6 @@
 {
   "name": "autoupdator-electron-example",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "To Auto Update Electron application",
   "main": "main.js",
   "scripts": {
