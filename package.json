@@ -1,12 +1,12 @@
 {
   "name": "autoupdator-electron-example",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "To Auto Update Electron application",
   "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "build": "electron-builder build  --win --publish never",
-    "deploy": "electron-builder build --win --publish always",
-    "start": "electron ."
+    "deploy": "electron-builder build --win --publish always"
   },
   "repository": {
     "type": "git",
@@ -19,10 +19,10 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^7.1.7",
+    "electron": "^7.1.8",
     "electron-builder": "^21.2.0",
     "electron-packager": "^14.1.1"
   },
