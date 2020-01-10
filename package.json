@@ -1,8 +1,8 @@
 {
   "name": "autoupdator-electron-example",
-  "version": "2.1.4",
+  "version": "2.1.2",
   "description": "To Auto Update Electron application",
-  "main": "main.js",
+  "main": "main.js",  
   "scripts": {
     "start": "electron .",
     "build": "electron-builder build  --win --publish never",
