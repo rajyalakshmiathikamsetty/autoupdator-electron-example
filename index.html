@@ -7,7 +7,7 @@
       margin: 0;
       padding: 20px;
       font-family: sans-serif;
-      background-color: rgb(68, 221, 241);
+      background-color: rgb(228, 147, 191);
       text-align: center;
     }
     #notification {
@@ -51,13 +51,11 @@
     });
     ipcRenderer.on('update_available', () => {
       ipcRenderer.removeAllListeners('update_available');
-      alert("A new update is available. Downloading now...");
       message.innerText = 'A new update is available. Downloading now...';
       notification.classList.remove('hidden');
     });
     ipcRenderer.on('check_update', () => {
       ipcRenderer.removeAllListeners('check_update');
-      alert("Looking for update...");
       message.innerText = 'Looking for update...';
       notification.classList.remove('hidden');
     });
@@ -67,9 +65,7 @@
       notification.classList.remove('hidden');
     });
     ipcRenderer.on('update_downloaded', () => {
-      text.innerText ="test downloading event"
       ipcRenderer.removeAllListeners('update_downloaded');
-      alert("Update Downloaded. It will be installed on restart. Restart now");
       message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
       restartButton.classList.remove('hidden');
       notification.classList.remove('hidden');

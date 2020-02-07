@@ -73,9 +73,9 @@ autoUpdater.on('update-available', () => {
 
 autoUpdater.on('update-downloaded', (info) => {
       mainWindow.webContents.send('update_downloaded');
-      setTimeout(function () {
-      autoUpdater.quitAndInstall();
-  }, 5000)
+  //     setTimeout(function () {
+  //     autoUpdater.quitAndInstall();
+  // }, 6000)
 });
 
 
@@ -89,7 +89,7 @@ autoUpdater.on('update-not-available', () => {
 
 ipcMain.on('restart_app', () => {
   try {
-    autoUpdater.quitAndInstall(true,true);
+    autoUpdater.quitAndInstall();
     setTimeout(() => {
       app.relaunch();
       app.exit(0);
@@ -97,7 +97,7 @@ ipcMain.on('restart_app', () => {
   } catch (e) {
     dialog.showErrorBox('Error', 'Failed to install updates');
   }
-});;
+});
 
 autoUpdater.on('error', (err) => {
   console.log('Error in auto-updater. ' + err);
