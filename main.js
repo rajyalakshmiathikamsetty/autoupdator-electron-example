@@ -46,7 +46,7 @@ app.on('ready', async () => {
    } else {
   autoUpdater.checkForUpdatesAndNotify();
   }
-  //autoUpdater.checkForUpdatesAndNotify();
+  //autoUpdater.checkForUpdates();
 })
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
