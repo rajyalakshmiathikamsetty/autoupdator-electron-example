@@ -22,13 +22,10 @@
   "author": "",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^7.1.11",
-    "electron-builder": "^21.2.0",
-    "electron-packager": "^14.1.1"
+    "electron": "^7.1.11"
   },
   "dependencies": {
-    "electron-log": "^4.0.6",
-    "electron-updater": "^4.2.0",
+    
     "update-electron-app": "^1.5.0"
   }
 }
