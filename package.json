@@ -1,6 +1,6 @@
 {
   "name": "autoupdator-electron-example",
-  "version": "2.1.6",
+  "version": "2.1.4",
   "description": "To Auto Update Electron application",
   "main": "main.js",
   "scripts": {
@@ -22,10 +22,12 @@
   "author": "",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^7.1.11"
+    "electron": "^7.1.11",
+    "electron-builder": "^22.3.2"
   },
   "dependencies": {
-    
+    "electron-log": "^4.0.6",
+    "electron-updater": "^4.2.0",
     "update-electron-app": "^1.5.0"
   }
 }
