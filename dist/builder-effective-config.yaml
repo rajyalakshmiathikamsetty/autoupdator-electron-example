@@ -1,8 +1,0 @@
-directories:
-  output: dist
-  buildResources: build
-appId: com.example.ElectronAutoUpdate
-publish:
-  provider: github
-  token: <stripped sensitive data>
-electronVersion: 7.1.11
