@@ -1,13 +1,12 @@
 {
   "name": "autoupdator-electron-example",
-  "version": "2.1.6",
+  "version": "2.1.5",
   "description": "To Auto Update Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder build  --win --publish never",
-    "deploy": "electron-builder build --win --publish always",
-    "publish": "build --win -p always"
+    "deploy": "electron-builder build --win --publish always"
   },
   "repository": {
     "type": "git",
@@ -31,14 +30,5 @@
     "electron-log": "^4.0.6",
     "electron-updater": "^4.2.0",
     "update-electron-app": "^1.5.0"
-  },
-  "build": {
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "rajyalakshmiathikamsetty",
-        "repo": "autoupdator-electron-example"
-      }
-    ]
   }
 }
